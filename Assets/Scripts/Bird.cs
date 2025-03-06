@@ -33,7 +33,7 @@ public class Bird : MonoBehaviour
         }
     }
 
-    public void OnThrow()
+    public virtual void OnThrow()
     {
         //play the sound
         GetComponent<AudioSource>().Play();
