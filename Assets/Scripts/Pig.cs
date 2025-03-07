@@ -27,17 +27,22 @@ public class Pig : MonoBehaviour
         {
             //calculate the damage via the hit object velocity
             float damage = col.gameObject.GetComponent<Rigidbody2D>().velocity.magnitude * 10;
-            Health -= damage;
-            //don't play sound for small damage
-            if (damage >= 10)
-                GetComponent<AudioSource>().Play();
-
-            if (Health < ChangeSpriteHealth)
-            {//change the shown sprite
-                GetComponent<SpriteRenderer>().sprite = SpriteShownWhenHurt;
-            }
-            if (Health <= 0) Destroy(this.gameObject);
+            
         }
+    }
+
+    public void TakeDamage(float damage)
+    {
+        Health -= damage;
+        //don't play sound for small damage
+        if (damage >= 10)
+            GetComponent<AudioSource>().Play();
+
+        if (Health < ChangeSpriteHealth)
+        {//change the shown sprite
+            GetComponent<SpriteRenderer>().sprite = SpriteShownWhenHurt;
+        }
+        if (Health <= 0) Destroy(this.gameObject);
     }
 
     //sound found in
