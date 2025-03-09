@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 11400000}
   - component: {fileID: 8200000}
   m_Layer: 0
-  m_Name: Pig
+  m_Name: ArmoredPig
   m_TagString: Pig
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
