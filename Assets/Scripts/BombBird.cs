@@ -59,19 +59,13 @@ public class BombBird : Bird
         {
             if(col.gameObject.TryGetComponent<Brick>(out Brick brick))
             {
+                col.attachedRigidbody.AddForce((Vector2)(brick.transform.position - transform.position) * explosionKnockback / Mathf.Max(0.1f, Vector2.Distance(transform.position, brick.transform.position) / explosionRadius));
                 brick.TakeDamage(35 / Mathf.Max(0.01f, Vector2.Distance(transform.position, brick.transform.position) / explosionRadius));
-                if(brick.Health > 0)
-                {
-                    col.attachedRigidbody.AddForce((Vector2)(brick.transform.position - transform.position) * explosionKnockback / Mathf.Max(0.1f, Vector2.Distance(transform.position, brick.transform.position) / explosionRadius));
-                }
             }
             else if(col.gameObject.TryGetComponent<Pig>(out Pig pig))
             {
+                col.attachedRigidbody.AddForce((Vector2)(pig.transform.position - transform.position) * explosionKnockback * 0.5f / Mathf.Max(0.1f, Vector2.Distance(transform.position, pig.transform.position) / explosionRadius));
                 pig.TakeDamage(350 / Mathf.Max(0.01f, Vector2.Distance(transform.position, pig.transform.position) / explosionRadius));
-                if (pig.Health > 0)
-                {
-                    col.attachedRigidbody.AddForce((Vector2)(pig.transform.position - transform.position) * explosionKnockback * 0.5f / Mathf.Max(0.1f, Vector2.Distance(transform.position, pig.transform.position) / explosionRadius));
-                }
             }
             else if(col.gameObject.TryGetComponent<Bird>(out Bird bird) && bird != this)
             {
