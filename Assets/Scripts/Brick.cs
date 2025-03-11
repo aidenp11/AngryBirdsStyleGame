@@ -10,6 +10,14 @@ public class Brick : MonoBehaviour
         if (col.gameObject.GetComponent<Rigidbody2D>() == null) return;
 
         float damage = col.gameObject.GetComponent<Rigidbody2D>().velocity.magnitude * 10;
+
+        TakeDamage(damage);
+    }
+
+    public float Health = 70f;
+
+    public void TakeDamage(float damage)
+    {
         //don't play audio for small damages
         if (damage >= 10)
             GetComponent<AudioSource>().Play();
@@ -18,9 +26,6 @@ public class Brick : MonoBehaviour
         //if health is 0, destroy the block
         if (Health <= 0) Destroy(this.gameObject);
     }
-
-    public float Health = 70f;
-
 
     //wood sound found in 
     //https://www.freesound.org/people/Srehpog/sounds/31623/
