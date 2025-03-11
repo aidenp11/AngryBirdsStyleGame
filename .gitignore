@@ -56,3 +56,4 @@ $RECYCLE.BIN/
 
 # VS
 .vs/
+*.log
