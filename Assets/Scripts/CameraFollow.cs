@@ -18,6 +18,15 @@ public class CameraFollow : MonoBehaviour
         {
             if (BirdToFollow != null && BirdToFollow.Count > 0) //bird will be destroyed if it goes out of the scene
             {
+                while(BirdToFollow[0] == null)
+                {
+                    BirdToFollow.RemoveAt(0);
+                    if(BirdToFollow.Count == 0 )
+                    {
+                        IsFollowing = false;
+                        return;
+                    }
+                }
                 var birdPosition = BirdToFollow[0].transform.position;
                 float x = Mathf.Clamp(birdPosition.x, minCameraX, maxCameraX);
                 //camera follows bird's x position

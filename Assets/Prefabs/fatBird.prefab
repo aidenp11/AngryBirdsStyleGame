@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 9600000}
   - component: {fileID: 8200000}
   - component: {fileID: 7114582408718247276}
+  - component: {fileID: 8868233937377773069}
   m_Layer: 6
   m_Name: fatBird
   m_TagString: Bird
@@ -342,3 +343,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0959f18feea8d2744afca863f2f065d7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &8868233937377773069
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 100000}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a6172762d98286a4f82221bc3935eaf3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Tags:
+  - Fat

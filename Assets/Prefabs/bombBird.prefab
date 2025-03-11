@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 9600000}
   - component: {fileID: 8200000}
   - component: {fileID: -6847508158277798320}
+  - component: {fileID: 6775290388743426759}
   m_Layer: 6
   m_Name: bombBird
   m_TagString: Bird
@@ -342,3 +343,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: efd4821ab56796b408f7ab8e15caa2f1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  explosionRadius: 2.5
+  explosionKnockback: 100
+  explosionFX: {fileID: 0}
+--- !u!114 &6775290388743426759
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 100000}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a6172762d98286a4f82221bc3935eaf3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Tags:
+  - Bomb
