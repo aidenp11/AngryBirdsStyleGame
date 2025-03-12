@@ -31,8 +31,8 @@ public class TNT : MonoBehaviour
                 }
             }
 
-           // audioSource.Play();
-            //Instantiate(fx, transform.position, Quaternion.identity);
+            audioSource.Play();
+            Instantiate(fx, transform.position, Quaternion.identity);
             Destroy(this.gameObject);
         }
     }
