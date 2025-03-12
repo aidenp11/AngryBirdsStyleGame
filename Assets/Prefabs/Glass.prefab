@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 6100000}
   - component: {fileID: 5000000}
   - component: {fileID: 8200000}
-  - component: {fileID: 207159171333039827}
+  - component: {fileID: 11400000}
   m_Layer: 0
   m_Name: Glass
   m_TagString: Brick
@@ -114,24 +114,6 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 2, y: 0.12}
   m_EdgeRadius: 0
---- !u!114 &11400000
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 100000}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0f5f806dfcb14154783a259d007def22, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  damageModifiers:
-  - condition: Blue
-    effect: 2
-  - condition: Fat
-    effect: 0.5
-  Health: 50
 --- !u!50 &5000000
 Rigidbody2D:
   serializedVersion: 4
@@ -249,7 +231,7 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
---- !u!114 &207159171333039827
+--- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -261,5 +243,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0f5f806dfcb14154783a259d007def22, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  extraBirdDmg: blue bird
+  damageModifiers:
+  - condition: Blue
+    effect: 2
+  - condition: Fat
+    effect: 0.5
   Health: 50

@@ -34,8 +34,7 @@ public class Brick : MonoBehaviour
             GetComponent<AudioSource>().Play();
         //decrease health according to magnitude of the object that hit us
 
-        if (col.gameObject.tag == extraBirdDmg) damage *= 2f;
-        ApplyDmg(damage);
+       
         //if health is 0, destroy the block
         if (Health <= 0) Destroy(this.gameObject);
     }

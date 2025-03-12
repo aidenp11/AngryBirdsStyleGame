@@ -27,7 +27,7 @@ public class TNT : MonoBehaviour
                 if (obj.GetComponent<Brick>())
                 {
                     Brick b = obj.GetComponent<Brick>();
-                    b.ApplyDmg(explosionDmg);
+                    b.Health -= explosionDmg;
                 }
             }
 
