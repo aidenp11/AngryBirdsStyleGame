@@ -4,6 +4,7 @@ using Assets.Scripts;
 using System.Linq;
 using DG.Tweening;
 using UnityEngine.SceneManagement;
+using UnityEditor;
 
 public class GameManager : MonoBehaviour
 {
@@ -17,6 +18,10 @@ public class GameManager : MonoBehaviour
 	private List<GameObject> Bricks;
 	private List<GameObject> Birds;
 	private List<GameObject> Pigs;
+
+	[SerializeField] GameObject winScreen;
+	[SerializeField] GameObject loseScreen;
+	[SerializeField] string nextLevel;
 
 	private static GameManager instance;
 
@@ -43,10 +48,9 @@ public class GameManager : MonoBehaviour
 			case GameState.Start:
 				//if player taps, begin animating the bird 
 				//to the slingshot
-				if (Input.GetMouseButtonUp(0))
-				{
+				
 					AnimateBirdToSlingshot();
-				}
+				
 				break;
 			case GameState.BirdMovingToSlingshot:
 				//do nothing
@@ -68,11 +72,10 @@ public class GameManager : MonoBehaviour
 			//in a normal game, we would show the "Won" screen 
 			//and on tap the user would go to the next level
 			case GameState.Won:
+				winScreen.SetActive(true);
+				break;
 			case GameState.Lost:
-				if (Input.GetMouseButtonUp(0))
-				{
-					SceneManager.LoadScene(SceneManager.GetActiveScene().name);
-				}
+				loseScreen.SetActive(true);
 				break;
 			default:
 				break;
@@ -227,21 +230,21 @@ public class GameManager : MonoBehaviour
 	/// </summary>
 	void OnGUI()
 	{
-		AutoResize(800, 480);
-		switch (CurrentGameState)
-		{
-			case GameState.Start:
-				GUI.Label(new Rect(0, 150, 200, 100), "Tap the screen to start");
-				break;
-			case GameState.Won:
-				GUI.Label(new Rect(0, 150, 200, 100), "You won! Tap the screen to restart");
-				break;
-			case GameState.Lost:
-				GUI.Label(new Rect(0, 150, 200, 100), "You lost! Tap the screen to restart");
-				break;
-			default:
-				break;
-		}
+		//AutoResize(800, 480);
+		//switch (CurrentGameState)
+		//{
+		//	case GameState.Start:
+		//		GUI.Label(new Rect(0, 150, 200, 100), "Tap the screen to start");
+		//		break;
+		//	case GameState.Won:
+		//		GUI.Label(new Rect(0, 150, 200, 100), "You won! Tap the screen to restart");
+		//		break;
+		//	case GameState.Lost:
+		//		GUI.Label(new Rect(0, 150, 200, 100), "You lost! Tap the screen to restart");
+		//		break;
+		//	default:
+		//		break;
+		//}
 	}
 
 	public void AddBird(GameObject bird)
@@ -272,6 +275,21 @@ public class GameManager : MonoBehaviour
 				Destroy(gameObject);
 			}
 		}
+	}
+
+	public void OnRetryButton()
+	{
+		SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+	}
+
+	public void OnNextLevelButton()
+	{
+		SceneManager.LoadScene(nextLevel);
+	}
+
+	public void OnLevelSelectButton()
+	{
+		SceneManager.LoadScene("LevelSelector");
 	}
 
 	public static GameManager Instance { get { return instance; } }
