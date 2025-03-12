@@ -12,18 +12,9 @@ EditorBuildSettings:
     path: Assets/Scenes/LevelSelector.unity
     guid: 8317ffc9d082cab4f8fcb0f01624d3a4
   - enabled: 1
+    path: Assets/Scenes/Levels/Level2.unity
+    guid: 9499d77fbcc85dc4b9ba39253dc93d6b
+  - enabled: 1
     path: Assets/Scenes/Levels/AidenLevel1.unity
     guid: 894f463823f55cb4ca5b52b8615f93dd
-  - enabled: 1
-    path: Assets/Scenes/Levels/L 1.unity
-    guid: 64d8f4c30bf35f549aecfae5e1f9ada5
-  - enabled: 1
-    path: Assets/Scenes/Levels/L 2.unity
-    guid: a1355e25aac40384c90a70ece246d917
-  - enabled: 1
-    path: Assets/Scenes/Levels/L 3.unity
-    guid: 5ea7cd5220f065d49a0eead9b94a7bac
-  - enabled: 1
-    path: Assets/Scenes/Levels/L 4.unity
-    guid: 29077f1e6a21a374485017b2a28cd4e7
   m_configObjects: {}
