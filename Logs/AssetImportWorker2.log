@@ -1209,3 +1209,27 @@ AssetImportParameters requested are different than current active one (requested
   custom:container-demuxer-ogg: 62fdf1f143b41e24485cea50d1cbac27 -> 
   custom:video-decoder-webm-vp8: 9c59270c3fd7afecdb556c50c9e8de78 -> 
   custom:audio-decoder-ogg-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
+========================================================================
+Received Import Request.
+  Time since last request: 757.960130 seconds.
+  path: Assets/Sprites/angry_birds_ocs_sprites__update__by_jared33-d5mg197.png
+  artifactKey: Guid(85aec2e11da99d141a70371bdb05d889) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Sprites/angry_birds_ocs_sprites__update__by_jared33-d5mg197.png using Guid(85aec2e11da99d141a70371bdb05d889) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '2c0a910381be5f0d51e40e2981504bcd') in 0.397940 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 12.147338 seconds.
+  path: Assets/Sprites/unknown_42.png
+  artifactKey: Guid(7750b31558a19634eb70aa42093ba9ae) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Sprites/unknown_42.png using Guid(7750b31558a19634eb70aa42093ba9ae) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'edb10e6f1b35f8954ada37a8388c2b06') in 0.029283 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 569.075885 seconds.
+  path: Assets/Sprites/Corpse_credits_new.png
+  artifactKey: Guid(08f7bbf0c5e92c145a0d84ea8d7ac2c3) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Sprites/Corpse_credits_new.png using Guid(08f7bbf0c5e92c145a0d84ea8d7ac2c3) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '46fb38e5cb2b902fc69b38c8f7dd1348') in 0.025212 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 91.132681 seconds.
+  path: Assets/Prefabs/WinLose.prefab
+  artifactKey: Guid(50fc5fbbe70a45b4aabd347041b8f517) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Prefabs/WinLose.prefab using Guid(50fc5fbbe70a45b4aabd347041b8f517) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'f1cc724d15a30563a280faac17e40561') in 0.063604 seconds 
