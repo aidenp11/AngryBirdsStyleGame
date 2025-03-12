@@ -90,6 +90,7 @@ public class GameManager : MonoBehaviour
 		return Pigs.All(x => x == null);
 	}
 
+
 	/// <summary>
 	/// Animates the camera to the original location
 	/// When it finishes, it checks if we have lost, won or we have other birds
@@ -125,6 +126,7 @@ public class GameManager : MonoBehaviour
 		//animate the camera to start
 		Camera.main.transform.DOMove(cameraFollow.StartingPosition, duration). //end position
 			OnComplete(() =>
+
 			{
 				cameraFollow.IsFollowing = false;
 				if (AllPigsDestroyed())
@@ -145,6 +147,7 @@ public class GameManager : MonoBehaviour
 					AnimateBirdToSlingshot();
 				}
 			});
+
 	}
 
 	/// <summary>
@@ -169,6 +172,7 @@ public class GameManager : MonoBehaviour
 			Vector2.Distance(Birds[currentBirdIndex].transform.position / 10,
 			slingshot.BirdWaitPosition.transform.position) / 10). //position
 				OnComplete(() =>
+
 				{
 					CurrentGameState = GameState.Playing;
 					slingshot.enabled = true; //enable slingshot
@@ -216,6 +220,7 @@ public class GameManager : MonoBehaviour
 		Vector2 resizeRatio = new Vector2((float)Screen.width / screenWidth, (float)Screen.height / screenHeight);
 		GUI.matrix = Matrix4x4.TRS(Vector3.zero, Quaternion.identity, new Vector3(resizeRatio.x, resizeRatio.y, 1.0f));
 	}
+
 
 	/// <summary>
 	/// Shows relevant GUI depending on the current game state
