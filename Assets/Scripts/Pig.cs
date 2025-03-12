@@ -37,7 +37,7 @@ public class Pig : MonoBehaviour
         if (col.gameObject.tag == "Bird")
         {          
 
-            float damage = Mathf.Abs(col.gameObject.GetComponent<Rigidbody2D>().velocity.magnitude) * 12.5f;
+            float damage = Mathf.Abs(col.gameObject.GetComponent<Rigidbody2D>().velocity.magnitude) * 15f;
 
 
 			Health -= damage;
@@ -57,11 +57,11 @@ public class Pig : MonoBehaviour
 			//calculate the damage via the hit object velocity
 			if (col.gameObject.GetComponent<Rigidbody2D>() == null)
             {
-                damage = Mathf.Abs(pastVelocity) * 12.5f;
+                damage = Mathf.Abs(pastVelocity) * 15f;
             }
 			else
 			{
-				damage = Mathf.Abs(col.gameObject.GetComponent<Rigidbody2D>().velocity.magnitude) * 12.5f;
+				damage = Mathf.Abs(col.gameObject.GetComponent<Rigidbody2D>().velocity.magnitude) * 15f;
 			}
 
 			
