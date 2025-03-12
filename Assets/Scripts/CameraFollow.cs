@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 public class CameraFollow : MonoBehaviour
 {
@@ -15,9 +16,18 @@ public class CameraFollow : MonoBehaviour
     {
         if (IsFollowing)
         {
-            if (BirdToFollow != null) //bird will be destroyed if it goes out of the scene
+            if (BirdToFollow != null && BirdToFollow.Count > 0) //bird will be destroyed if it goes out of the scene
             {
-                var birdPosition = BirdToFollow.transform.position;
+                while(BirdToFollow[0] == null)
+                {
+                    BirdToFollow.RemoveAt(0);
+                    if(BirdToFollow.Count == 0 )
+                    {
+                        IsFollowing = false;
+                        return;
+                    }
+                }
+                var birdPosition = BirdToFollow[0].transform.position;
                 float x = Mathf.Clamp(birdPosition.x, minCameraX, maxCameraX);
                 //camera follows bird's x position
                 transform.position = new Vector3(x, StartingPosition.y, StartingPosition.z);
@@ -36,5 +46,5 @@ public class CameraFollow : MonoBehaviour
     [HideInInspector]
     public bool IsFollowing;
     [HideInInspector]
-    public Transform BirdToFollow;
+    public List<Transform> BirdToFollow = new List<Transform>();
 }

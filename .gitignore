@@ -56,3 +56,15 @@ $RECYCLE.BIN/
 
 # VS
 .vs/
+Logs/AssetImportWorker0.log
+Logs/AssetImportWorker1.log
+Logs/shadercompiler-AssetImportWorker0.log
+Logs/shadercompiler-UnityShaderCompiler.exe0.log
+*.log
+*.log
+Logs/shadercompiler-UnityShaderCompiler.exe0.log
+Logs/shadercompiler-AssetImportWorker0.log
+*.log
+*.log
+Logs/AssetImportWorker4.log
+*.log
