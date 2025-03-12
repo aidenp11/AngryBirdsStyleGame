@@ -10,11 +10,14 @@ public class GameManager : MonoBehaviour
     public CameraFollow cameraFollow;
     int currentBirdIndex;
     public SlingShot slingshot;
+    [SerializeField] private bool overrideOtherGameManagers = false;
     [HideInInspector]
     public static GameState CurrentGameState = GameState.Start;
     private List<GameObject> Bricks;
     private List<GameObject> Birds;
     private List<GameObject> Pigs;
+
+    private static GameManager instance;
 
     // Use this for initialization
     void Start()
@@ -50,10 +53,10 @@ public class GameManager : MonoBehaviour
             case GameState.Playing:
                 //if we have thrown a bird
                 //and either everything has stopped moving
-                //or there has been 5 seconds since we threw the bird
+                //or there has been 50 seconds since we threw the bird
                 //animate the camera to the start position
                 if (slingshot.slingshotState == SlingshotState.BirdFlying &&
-                    (BricksBirdsPigsStoppedMoving() || Time.time - slingshot.TimeSinceThrown > 5f))
+                    (BricksBirdsPigsStoppedMoving() || Time.time - slingshot.TimeSinceThrown > 50f))
                 {
                     slingshot.enabled = false;
                     AnimateCameraToStartPosition();
@@ -145,7 +148,7 @@ public class GameManager : MonoBehaviour
     /// <param name="e"></param>
     private void Slingshot_BirdThrown(object sender, System.EventArgs e)
     {
-        cameraFollow.BirdToFollow = Birds[currentBirdIndex].transform;
+        cameraFollow.BirdToFollow.Add(Birds[currentBirdIndex].transform);
         cameraFollow.IsFollowing = true;
     }
 
@@ -200,5 +203,36 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    public void AddBird(GameObject bird)
+    {
+        Birds.Add(bird);
+    }
+
+    public void RemoveBird(GameObject bird)
+    {
+        Birds.Remove(bird);
+    }
+
+    private void Awake()
+    {
+        if(instance == null)
+        {
+            instance = this;
+        }
+        else if(instance != this)
+        {
+            if(overrideOtherGameManagers)
+            {
+                Destroy(instance.gameObject);
+                instance = this;
+            }
+            else
+            {
+                Destroy(gameObject);
+            }
+        }
+    }
+
+    public static GameManager Instance { get { return instance; } }
 
 }
