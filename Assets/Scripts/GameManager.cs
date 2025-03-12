@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Assets.Scripts;
 using System.Linq;
 using DG.Tweening;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -78,57 +79,17 @@ public class GameManager : MonoBehaviour
 		}
 	}
 
-    /// <summary>
-    /// Animates the camera to the original location
-    /// When it finishes, it checks if we have lost, won or we have other birds
-    /// available to throw
-    /// </summary>
-    private void AnimateCameraToStartPosition()
-    {
-        float duration = Vector2.Distance(Camera.main.transform.position, cameraFollow.StartingPosition) / 10f;
-        if (duration == 0.0f) duration = 0.1f;
-        //animate the camera to start
-        Camera.main.transform.DOMove(cameraFollow.StartingPosition, duration). //end position
-            OnComplete(() =>
-                        {
-                            cameraFollow.IsFollowing = false;
-                            if (AllPigsDestroyed())
-                            {
-                                CurrentGameState = GameState.Won;
-                            }
-                            //animate the next bird, if available
-                            else if (currentBirdIndex == Birds.Count - 1)
-                            {
-                                //no more birds, go to finished
-                                CurrentGameState = GameState.Lost;
-                            }
-                            else
-                            {
-                                slingshot.slingshotState = SlingshotState.Idle;
-                                //bird to throw is the next on the list
-                                currentBirdIndex++;
-                                AnimateBirdToSlingshot();
-                            }
-                        });
-    }
 
-    /// <summary>
-    /// Animates the bird from the waiting position to the slingshot
-    /// </summary>
-    void AnimateBirdToSlingshot()
-    {
-        CurrentGameState = GameState.BirdMovingToSlingshot;
-        Birds[currentBirdIndex].transform.DOMove
-            (slingshot.BirdWaitPosition.transform.position, //final position
-            Vector2.Distance(Birds[currentBirdIndex].transform.position / 10,
-            slingshot.BirdWaitPosition.transform.position) / 10). //position
-                OnComplete(() =>
-                        {   CurrentGameState = GameState.Playing;
-                            slingshot.enabled = true; //enable slingshot
-                            //current bird is the current in the list
-                            slingshot.BirdToThrow = Birds[currentBirdIndex];
-                        });
-    }
+	/// <summary>
+	/// A check whether all Pigs are null
+	/// i.e. they have been destroyed
+	/// </summary>
+	/// <returns></returns>
+	private bool AllPigsDestroyed()
+	{
+		return Pigs.All(x => x == null);
+	}
+
 
 	/// <summary>
 	/// Animates the camera to the original location
@@ -165,26 +126,28 @@ public class GameManager : MonoBehaviour
 		//animate the camera to start
 		Camera.main.transform.DOMove(cameraFollow.StartingPosition, duration). //end position
 			OnComplete(() =>
-						{
-							cameraFollow.IsFollowing = false;
-							if (AllPigsDestroyed())
-							{
-								CurrentGameState = GameState.Won;
-							}
-							//animate the next bird, if available
-							else if (lost)
-							{
-								//no more birds, go to finished
-								CurrentGameState = GameState.Lost;
-							}
-							else
-							{
-								slingshot.slingshotState = SlingshotState.Idle;
-								//bird to throw is the next on the list
-								currentBirdIndex++;
-								AnimateBirdToSlingshot();
-							}
-						});
+
+			{
+				cameraFollow.IsFollowing = false;
+				if (AllPigsDestroyed())
+				{
+					CurrentGameState = GameState.Won;
+				}
+				//animate the next bird, if available
+				else if (lost)
+				{
+					//no more birds, go to finished
+					CurrentGameState = GameState.Lost;
+				}
+				else
+				{
+					slingshot.slingshotState = SlingshotState.Idle;
+					//bird to throw is the next on the list
+					currentBirdIndex++;
+					AnimateBirdToSlingshot();
+				}
+			});
+
 	}
 
 	/// <summary>
@@ -209,64 +172,55 @@ public class GameManager : MonoBehaviour
 			Vector2.Distance(Birds[currentBirdIndex].transform.position / 10,
 			slingshot.BirdWaitPosition.transform.position) / 10). //position
 				OnComplete(() =>
-						{
-							CurrentGameState = GameState.Playing;
-							slingshot.enabled = true; //enable slingshot
-													  //current bird is the current in the list
-							slingshot.BirdToThrow = Birds[currentBirdIndex];
-						});
+
+				{
+					CurrentGameState = GameState.Playing;
+					slingshot.enabled = true; //enable slingshot
+											  //current bird is the current in the list
+					slingshot.BirdToThrow = Birds[currentBirdIndex];
+				});
 	}
 
-    /// <summary>
-    /// Check if all birds, pigs and bricks have stopped moving
-    /// </summary>
-    /// <returns></returns>
-    bool BricksBirdsPigsStoppedMoving()
-    {
-        foreach (var item in Bricks.Union(Birds).Union(Pigs))
-        {
-            if (item != null && item.GetComponent<Rigidbody2D>().velocity.sqrMagnitude > Constants.MinVelocity)
-            {
-                return false;
-            }
-        }
+	/// <summary>
+	/// Event handler, when the bird is thrown, camera starts following it
+	/// </summary>
+	/// <param name="sender"></param>
+	/// <param name="e"></param>
+	private void Slingshot_BirdThrown(object sender, System.EventArgs e)
+	{
+		cameraFollow.BirdToFollow.Add(Birds[currentBirdIndex].transform);
+		cameraFollow.IsFollowing = true;
+	}
 
-        return true;
-    }
+	/// <summary>
+	/// Check if all birds, pigs and bricks have stopped moving
+	/// </summary>
+	/// <returns></returns>
+	bool BricksBirdsPigsStoppedMoving()
+	{
+		foreach (var item in Bricks.Union(Birds).Union(Pigs))
+		{
+			if (item != null && item.GetComponent<Rigidbody2D>().velocity.sqrMagnitude > Constants.MinVelocity)
+			{
+				return false;
+			}
+		}
 
-    /// <summary>
-    /// Found here
-    /// http://www.bensilvis.com/?p=500
-    /// </summary>
-    /// <param name="screenWidth"></param>
-    /// <param name="screenHeight"></param>
-    public static void AutoResize(int screenWidth, int screenHeight)
-    {
-        Vector2 resizeRatio = new Vector2((float)Screen.width / screenWidth, (float)Screen.height / screenHeight);
-        GUI.matrix = Matrix4x4.TRS(Vector3.zero, Quaternion.identity, new Vector3(resizeRatio.x, resizeRatio.y, 1.0f));
-    }
+		return true;
+	}
 
-    /// <summary>
-    /// Shows relevant GUI depending on the current game state
-    /// </summary>
-    void OnGUI()
-    {
-        AutoResize(800, 480);
-        switch (CurrentGameState)
-        {
-            case GameState.Start:
-                GUI.Label(new Rect(0, 150, 200, 100), "Tap the screen to start");
-                break;
-            case GameState.Won:
-                GUI.Label(new Rect(0, 150, 200, 100), "You won! Tap the screen to restart");
-                break;
-            case GameState.Lost:
-                GUI.Label(new Rect(0, 150, 200, 100), "You lost! Tap the screen to restart");
-                break;
-            default:
-                break;
-        }
-    }
+	/// <summary>
+	/// Found here
+	/// http://www.bensilvis.com/?p=500
+	/// </summary>
+	/// <param name="screenWidth"></param>
+	/// <param name="screenHeight"></param>
+	public static void AutoResize(int screenWidth, int screenHeight)
+	{
+		Vector2 resizeRatio = new Vector2((float)Screen.width / screenWidth, (float)Screen.height / screenHeight);
+		GUI.matrix = Matrix4x4.TRS(Vector3.zero, Quaternion.identity, new Vector3(resizeRatio.x, resizeRatio.y, 1.0f));
+	}
+
 
 	/// <summary>
 	/// Shows relevant GUI depending on the current game state
