@@ -7,6 +7,7 @@ public class BombBird : Bird
     [SerializeField] private float explosionRadius = 2.5f;
     [SerializeField] private float explosionKnockback = 100f;
     [SerializeField] private GameObject explosionFX;
+    [SerializeField] private AudioSource explosionSX;
     bool abilityAvailable = false;
     float explosionDelay = 0;
     bool collided = false;
@@ -53,7 +54,11 @@ public class BombBird : Bird
     {
         if (explosionFX != null)
         {
-            Instantiate(explosionFX);
+            Instantiate(explosionFX, transform.position, Quaternion.identity);
+        }
+        if(explosionSX != null)
+        {
+            explosionSX.Play();
         }
         foreach (Collider2D col in Physics2D.OverlapCircleAll(transform.position, explosionRadius))
         {
