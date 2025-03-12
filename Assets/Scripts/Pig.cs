@@ -78,7 +78,7 @@ public class Pig : MonoBehaviour
         }
     }
 
-	public void TakeDamage(float damage)
+    public void TakeDamage(float damage)
     {
         Health -= damage;
         //don't play sound for small damage
