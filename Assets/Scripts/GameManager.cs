@@ -57,7 +57,7 @@ public class GameManager : MonoBehaviour
 				//or there has been 50 seconds since we threw the bird
 				//animate the camera to the start position
 				if (slingshot.slingshotState == SlingshotState.BirdFlying &&
-					(BricksBirdsPigsStoppedMoving() || Time.time - slingshot.TimeSinceThrown > 15f))
+					(BricksBirdsPigsStoppedMoving() || Time.time - slingshot.TimeSinceThrown > 6.5f))
 				{
 					slingshot.enabled = false;
 					AnimateCameraToStartPosition();
