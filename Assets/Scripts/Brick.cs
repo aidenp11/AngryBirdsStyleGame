@@ -5,7 +5,7 @@ public class Brick : MonoBehaviour
 {
 
 
-    void OnCollisionEnter2D(Collision2D col)
+    protected virtual void OnCollisionEnter2D(Collision2D col)
     {
         if (col.gameObject.GetComponent<Rigidbody2D>() == null) return;
 
@@ -14,11 +14,19 @@ public class Brick : MonoBehaviour
         if (damage >= 10)
             GetComponent<AudioSource>().Play();
         //decrease health according to magnitude of the object that hit us
-        Health -= damage;
+
+        if (col.gameObject.tag == extraBirdDmg) damage *= 2f;
+        ApplyDmg(damage);
         //if health is 0, destroy the block
         if (Health <= 0) Destroy(this.gameObject);
     }
 
+    public void ApplyDmg(float dmg)
+    {
+        Health -= dmg;
+    }
+
+    public string extraBirdDmg;
     public float Health = 70f;
 
 
