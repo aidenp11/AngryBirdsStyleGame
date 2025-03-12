@@ -5,9 +5,9 @@ using Assets.Scripts;
 [RequireComponent(typeof(Rigidbody2D))]
 public class Bird : MonoBehaviour
 {
-
+    protected bool removeFromBirdList = false;
     // Use this for initialization
-    void Start()
+    protected virtual void Start()
     {
         //trailrenderer is not visible until we throw the bird
         GetComponent<TrailRenderer>().enabled = false;
@@ -33,7 +33,7 @@ public class Bird : MonoBehaviour
         }
     }
 
-    public void OnThrow()
+    public virtual void OnThrow()
     {
         //play the sound
         GetComponent<AudioSource>().Play();
@@ -49,12 +49,18 @@ public class Bird : MonoBehaviour
     IEnumerator DestroyAfter(float seconds)
     {
         yield return new WaitForSeconds(seconds);
+        GameManager.Instance.cameraFollow.BirdToFollow.Remove(gameObject.transform);
+        if(removeFromBirdList)
+        {
+            GameManager.Instance.RemoveBird(gameObject);
+            GameManager.Instance.cameraFollow.BirdToFollow.Remove(gameObject.transform);
+        }
         Destroy(gameObject);
     }
 
     public BirdState State
     {
         get;
-        private set;
+        protected set;
     }
 }
