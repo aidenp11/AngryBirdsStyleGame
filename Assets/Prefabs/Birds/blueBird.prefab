@@ -344,7 +344,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dbcd632b1031a13499604a6e1fe05e6b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  childPrefab: {fileID: 100000, guid: dbcabc26c12635740822c50b2100fdd4, type: 3}
+  childPrefab: {fileID: 100000, guid: a9e94e42d790553448e5f4e792c7da83, type: 3}
 --- !u!114 &-4142445336531754076
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -371,3 +371,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3f35073a0d6393e46abd48f876152375, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  thrown: 0
